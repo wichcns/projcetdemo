@@ -14,7 +14,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Username</th>
                         <th scope="col">ชื่อสมาชิก</th>
-                        <th scope="col">Log เข้าสู้ระบบ555</th>
+                        <th scope="col">Log เข้าสู้ระบบ</th>
                       </tr>
                     </thead>
                     <tbody>
