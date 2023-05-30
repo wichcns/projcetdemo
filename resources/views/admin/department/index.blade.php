@@ -16,6 +16,35 @@
                         <div class="card-header">
                             ตารางข้อมูลแผนก
                         </div>
+
+                        <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">ชื่อแผนก</th>
+                                <th scope="col">ผู้บันทึก</th>
+                                <th scope="col">เวลาเพิ่มเข้าระบบ</th>
+                                <th scope="col">แก้ไขข้อมูล</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                {{-- @php ($i=1) @endphp --}}
+                                @foreach ($departmaents as $row)
+                                    <tr>
+                                        <th>{{$departmaents->firstItem()+$loop->index}}</th>
+                                        <th>{{$row->department_name}}</th>
+                                        <th>{{$row->user->name}}</th>
+                                        <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
+                                        <td>
+                                            <a href="{{url('/department/edit/{id}'.$row->id)}}" class="btn btn-danger">แก้ไข</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                              </tr>
+                            </tbody>
+                          </table>
+                          {{$departmaents->links()}}
                     </div>
                 </div>
                 <div class="col-md-4">
