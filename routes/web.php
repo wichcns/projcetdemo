@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use app\Models\User;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\DepartmentController;
+// use app\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,9 +25,11 @@ Route::get('/', function () {
 //     })->name('dashboard');
 // });
 Route::middleware(['auth:sanctum','verified'])->get('/dashboard', function(){
-    //มาจาก Model user
-    $users = User::all();
+    // //มาจาก Model user
+    // $users = User::all();
+   $users = DB::table('users')->get();
     return view('dashboard',compact('users'));
 })->name('dashboard');
 
-
+Route::get('/department/all',[DepartmentController::class,'index'])->name('department');
+Route::post('/department/add',[DepartmentController::class,'store'])->name('addDepartment');

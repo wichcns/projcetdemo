@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             ข้อมูลรายงานสมาชิก {{Auth::user()->name}}
+            <b class="float-end">จำนวนผู้ใช้ระบบ {{count($users)}} คน</b>
         </h2>
     </x-slot>
 
@@ -14,7 +15,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Username</th>
                         <th scope="col">ชื่อสมาชิก</th>
-                        <th scope="col">Log เข้าสู้ระบบ</th>
+                        <th scope="col">เริ่มใช้งาน ระบบ</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -25,9 +26,8 @@
                                 <th>{{$i++}}</th>
                                 <th>{{$row->email}}</th>
                                 <th>{{$row->name}}</th>
-                                <th>{{$row->created_at}}</th>
+                                <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
                             </tr>
-
                         @endforeach
                       </tr>
                     </tbody>
