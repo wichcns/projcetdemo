@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Departmaent;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -21,7 +22,12 @@ class DepartmentController extends Controller
 
         ]
     );
-    //บันทึกข้อมูล
-    $department = new Departmaent;
+        //บันทึกข้อมูล
+        $department = new Departmaent;
+        $department->department_name = $request->department_name;
+        $department->user_id = Auth::user()->id;
+        $department->save();
+        return redirect()->back()->with('success',"บันทึกข้อมูลเรียบร้อย");
+
     }
 }
