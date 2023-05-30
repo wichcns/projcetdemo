@@ -30,6 +30,9 @@ Route::middleware(['auth:sanctum','verified'])->get('/dashboard', function(){
    $users = DB::table('users')->get();
     return view('dashboard',compact('users'));
 })->name('dashboard');
+Route::middleware(['auth:sanctum','verified'])->group(function() {
+    Route::get('/department/all',[DepartmentController::class,'index'])->name('department');
+    Route::post('/department/add',[DepartmentController::class,'store'])->name('addDepartment');
+    Route::get('/department/edit/{id}',[DepartmentController::class,'edit']);
+});
 
-Route::get('/department/all',[DepartmentController::class,'index'])->name('department');
-Route::post('/department/add',[DepartmentController::class,'store'])->name('addDepartment');
