@@ -55,7 +55,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="department_name">ชื่อแผนก</label>
-                                    <input type="text" class="form-control" name="department_name">
+                                    <input type="text" class="form-control" name="department_name" >
                                 </div>
                                 @error('department_name')
                                     <div class="my-2">
