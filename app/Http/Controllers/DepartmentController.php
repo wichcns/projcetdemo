@@ -44,8 +44,12 @@ class DepartmentController extends Controller
         return redirect()->back()->with('success',"บันทึกข้อมูลเรียบร้อย");
 
     }
+    // public function edit($id){
+    //     $department = Departmaent::find($id);
+    //     return view('admin.department.edit',compact('department'));
+    // }
     public function edit($id){
-        $department = Departmaent::find($id);
-        return view('admin.department.edit',compact('department'));
+        $departmaents = Departmaent::find($id);
+        return view('admin.department.edit',compact('departmaents'));
     }
 }
