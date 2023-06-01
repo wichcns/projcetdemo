@@ -25,6 +25,7 @@
                                 @enderror
                                 <br>
                                 <input type="submit" value="อัพเดต" class="btn btn-outline-primary">
+                                <button type="button" class="btn btn-outline-danger" href="{{route('department')}}">ย้อนกลับ</button>
                             </form>
                         </div>
                     </div>
