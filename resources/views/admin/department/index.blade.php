@@ -25,6 +25,7 @@
                                 <th scope="col">ผู้บันทึก</th>
                                 <th scope="col">เวลาเพิ่มเข้าระบบ</th>
                                 <th scope="col">แก้ไขข้อมูล</th>
+                                <th scope="col">ลบ</th>
                               </tr>
                             </thead>
                             <tbody>
@@ -37,7 +38,10 @@
                                         <th>{{$row->user->name}}</th>
                                         <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
                                         <td>
-                                            <a href="{{url('/department/edit/{id}'.$row->id)}}" class="btn btn-danger">แก้ไข</a>
+                                            <a href="{{url('/department/edit/'.$row->id)}}" class="btn btn-outline-warning">แก้ไข</a>
+                                        </td>
+                                        <td>
+                                            <a href="{{url('/department/softdelete/'.$row->id)}}" class="btn btn-outline-danger">ลบ</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,7 +68,7 @@
                                 @enderror
                                 <br>
                                     {{-- <button type="submit" class="btn btn-primary">บันทึก</button> --}}
-                                    <input type="submit" value="บันทึก" class="btn btn-primary">
+                                    <input type="submit" value="บันทึก" class="btn btn-outline-primary">
                             </form>
                         </div>
                     </div>

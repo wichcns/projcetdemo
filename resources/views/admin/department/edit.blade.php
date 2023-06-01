@@ -11,14 +11,11 @@
                 <div class="card">
                         <div class="card-header">แบบฟอร์มแก้ไขข้อมูล</div>
                         <div class="card-body">
-                            <form action="" method="post">
+                            <form action="{{url('/department/update/'.$departmaents->id)}}" method="post">
                                 @csrf
-                                @php
-                                    $depart = $departmaents->department_name ?? $departmaents->department_name;
-                                @endphp
                                 <div class="form-group">
                                     <label for="department_name">ชื่อแผนก</label>
-                                    <input type="text" class="form-control" name="department_name" value="{{$depart}}">
+                                    <input type="text" class="form-control" name="department_name" value="{{$departmaents->department_name}}">
 
                                 </div>
                                 @error('department_name')
@@ -27,7 +24,7 @@
                                     </div>
                                 @enderror
                                 <br>
-                                <input type="submit" value="อัพเดต" class="btn btn-primary">
+                                <input type="submit" value="อัพเดต" class="btn btn-outline-primary">
                             </form>
                         </div>
                     </div>
