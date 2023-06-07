@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\ServiceController;
 // use app\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -36,5 +37,10 @@ Route::middleware(['auth:sanctum','verified'])->group(function() {
     Route::get('/department/edit/{id}',[DepartmentController::class,'edit']);
     Route::post('/department/update/{id}',[DepartmentController::class,'update']);
     Route::get('/department/softdelete/{id}',[DepartmentController::class,'softdelete']);
+    Route::get('/department/restore/{id}',[DepartmentController::class,'restore']);
+    Route::get('/department/delete/{id}',[DepartmentController::class,'delete']);
+
+    //service
+    Route::get('/service/all',[ServiceController::class,'index'])->name('services');
 });
 

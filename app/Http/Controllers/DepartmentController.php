@@ -12,10 +12,11 @@ class DepartmentController extends Controller
     public function index(){
         //Eloquent
         $departmaents = Departmaent::paginate(5);
+        $trashDepartment = Departmaent::onlyTrashed()->paginate(3);
         // Query Builder
         // $departmaents = DB::table('departmaents')->get();
 
-        return view('admin.department.index',compact('departmaents'));
+        return view('admin.department.index',compact('departmaents','trashDepartment'));
     }
     public function store(Request $request){
         // dd($request->department_name);
@@ -70,4 +71,12 @@ class DepartmentController extends Controller
         $delete = Departmaent::find($id)->delete();
         return redirect()->back()->with('success',"ลบข้อมูลเรียบร้อย");
 }
+    public function restore($id){
+        $restore = Departmaent::withTrashed()->find($id)->restore();
+        return redirect()->back()->with('success',"กู้คืนข้อมูลเรียบร้อย");
+    }
+    public function delete($id){
+       $deletes = Departmaent::onlyTrashed()->find($id)->forceDelete();
+        return redirect()->back()->with('success',"ลบข้อมูลถาวรเรียบร้อย");
+    }
 }

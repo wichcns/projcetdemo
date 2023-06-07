@@ -21,8 +21,8 @@
                             <thead>
                               <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">ชื่อแผนก</th>
-                                <th scope="col">ผู้บันทึก</th>
+                                <th scope="col">ภาพประกอบ</th>
+                                <th scope="col">ชื่อบริการ</th>
                                 <th scope="col">เวลาเพิ่มเข้าระบบ</th>
                                 <th scope="col">แก้ไขข้อมูล</th>
                                 <th scope="col">ลบ</th>
@@ -31,11 +31,11 @@
                             <tbody>
                               <tr>
                                 {{-- @php ($i=1) @endphp --}}
-                                @foreach ($departmaents as $row)
+                                @foreach ($service as $row)
                                     <tr>
-                                        <th>{{$departmaents->firstItem()+$loop->index}}</th>
-                                        <th>{{$row->department_name}}</th>
-                                        <th>{{$row->user->name}}</th>
+                                        <th>{{$service->firstItem()+$loop->index}}</th>
+                                        <th>{{$row->service_image}}</th>
+                                        <th>{{$row->service_name}}</th>
                                         <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
                                         <td>
                                             <a href="{{url('/department/edit/'.$row->id)}}" class="btn btn-outline-warning">แก้ไข</a>
@@ -48,59 +48,30 @@
                               </tr>
                             </tbody>
                           </table>
-                          {{$departmaents->links()}}
+                          {{$service->links()}}
                     </div>
-                    @if (count($trashDepartment)>0)
-                    <div class="card my-2">
-                        <div class="card-header">
-                            ถังขยะ
-                        </div>
 
-                        <table class="table table-bordered">
-                            <thead>
-                              <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">ชื่อแผนก</th>
-                                <th scope="col">ผู้บันทึก</th>
-                                <th scope="col">เวลาเพิ่มเข้าระบบ</th>
-                                <th scope="col">กู้คืน</th>
-                                <th scope="col">ลบถาวร</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <tr>
-                                @foreach ($trashDepartment as $row)
-                                    <tr>
-                                        <th>{{$trashDepartment->firstItem()+$loop->index}}</th>
-                                        <th>{{$row->department_name}}</th>
-                                        <th>{{$row->user->name}}</th>
-                                        <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
-                                        <td>
-                                            <a href="{{url('/department/restore/'.$row->id)}}" class="btn btn-outline-warning">Restore</a>
-                                        </td>
-                                        <td>
-                                            <a href="{{url('/department/delete/'.$row->id)}}" class="btn btn-outline-danger">ลบถาวร</a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                              </tr>
-                            </tbody>
-                          </table>
-                          {{$trashDepartment->links()}}
-                    </div>
-                    @endif
                 </div>
                 <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header">แบบฟอร์ม</div>
+                        <div class="card-header">แบบฟอร์มบริการ</div>
                         <div class="card-body">
-                            <form action="{{route('addDepartment')}}" method="post">
+                            <form action="{{route('addDepartment')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="department_name">ชื่อแผนก</label>
-                                    <input type="text" class="form-control" name="department_name" >
+                                    <label for="service_name">ชื่อบริการ</label>
+                                    <input type="text" class="form-control" name="service_name" >
                                 </div>
-                                @error('department_name')
+                                @error('service_name')
+                                    <div class="my-2">
+                                        <span class="text-danger">{{$message}}</span>
+                                    </div>
+                                @enderror
+                                <div class="form-group">
+                                    <label for="service_image">ภาพประกอบ</label>
+                                    <input type="file" class="form-control" name="service_image" >
+                                </div>
+                                @error('service_image')
                                     <div class="my-2">
                                         <span class="text-danger">{{$message}}</span>
                                     </div>
