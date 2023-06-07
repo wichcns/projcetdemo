@@ -31,14 +31,14 @@
                             <tbody>
                               <tr>
                                 {{-- @php ($i=1) @endphp --}}
-                                @foreach ($service as $row)
+                                @foreach ($services as $row)
                                     <tr>
-                                        <th>{{$service->firstItem()+$loop->index}}</th>
-                                        <th>{{$row->service_image}}</th>
+                                        <th>{{$services->firstItem()+$loop->index}}</th>
+                                        <th><img src="{{asset($row->service_image)}}" alt="" width="100px" height="100px"></th>
                                         <th>{{$row->service_name}}</th>
                                         <th>{{Carbon\Carbon::parse($row->created_at)->diffForHumans()}}</th>
                                         <td>
-                                            <a href="{{url('/department/edit/'.$row->id)}}" class="btn btn-outline-warning">แก้ไข</a>
+                                            <a href="{{url('/service/edit/'.$row->id)}}" class="btn btn-outline-warning">แก้ไข</a>
                                         </td>
                                         <td>
                                             <a href="{{url('/department/softdelete/'.$row->id)}}" class="btn btn-outline-danger">ลบ</a>
@@ -48,7 +48,7 @@
                               </tr>
                             </tbody>
                           </table>
-                          {{$service->links()}}
+                          {{$services->links()}}
                     </div>
 
                 </div>
@@ -56,11 +56,11 @@
                     <div class="card">
                         <div class="card-header">แบบฟอร์มบริการ</div>
                         <div class="card-body">
-                            <form action="{{route('addDepartment')}}" method="post" enctype="multipart/form-data">
+                            <form action="{{route('addService')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="service_name">ชื่อบริการ</label>
-                                    <input type="text" class="form-control" name="service_name" >
+                                    <input type="text" class="form-control" name="service_name">
                                 </div>
                                 @error('service_name')
                                     <div class="my-2">
@@ -69,7 +69,7 @@
                                 @enderror
                                 <div class="form-group">
                                     <label for="service_image">ภาพประกอบ</label>
-                                    <input type="file" class="form-control" name="service_image" >
+                                    <input type="file" class="form-control" name="service_image">
                                 </div>
                                 @error('service_image')
                                     <div class="my-2">
@@ -77,8 +77,7 @@
                                     </div>
                                 @enderror
                                 <br>
-                                    {{-- <button type="submit" class="btn btn-primary">บันทึก</button> --}}
-                                    <input type="submit" value="บันทึก" class="btn btn-outline-primary">
+                                <input type="submit" value="บันทึก" class="btn btn-outline-primary">
                             </form>
                         </div>
                     </div>
