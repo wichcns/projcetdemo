@@ -99,4 +99,13 @@ class ServiceController extends Controller
             return redirect()->route('services')->with('success',"อัพเดตชื่อบริการเรียบร้อย");
         }
     }
+    public function delete($id){
+        //ลบภาพ
+        $img = Service::find($id)->service_image;
+        unlink($img);
+
+        //ลบข้อมูลจากฐานข้อมูล
+        $deletes = Service::find($id)->delete();
+        return redirect()->back()->with('success',"ลบข้อมูลเรียบร้อย");
+     }
 }
